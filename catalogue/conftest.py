@@ -3,6 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+
+SUPPORTED_LANGUAGES = ['en', 'ru', 'es', 'fr', 'de']
+
 def pytest_addoption(parser):
     parser.addoption(
         '--language', 
@@ -16,7 +19,7 @@ def browser(request):
     language = request.config.getoption("language")
     print(f"\nStarting Chrome browser with language: {language}")
 
-    if language not in ['en', 'ru', 'es', 'fr', 'de']:
+    if language not in SUPPORTED_LANGUAGES:
         raise pytest.UsageError("--language should be one of: en, ru, es, fr, de")
 
     options = Options()
